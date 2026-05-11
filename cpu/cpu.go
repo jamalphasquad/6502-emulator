@@ -58,8 +58,17 @@ func (c *CPU) Reset() {
 
 }
 
-// TODO: stub for now
-func (c *CPU) ExectuteCode() {
-	instructions := c.Memory[c.PC] // fetch instruction at current program counter
-	_ = instructions
+// TODO: stub for now (executing n number of instructions)
+func (c *CPU) ExectuteCode(numInstructions uint32) {
+
+	for i := uint32(0); i < numInstructions; i++ {
+		instruction := c.fetchInstruction()
+	}
+}
+
+func (c *CPU) fetchInstruction() uint8 {
+	instr := c.Memory[c.PC] // fetch instruction at current program counter
+	println("fetching instruction: ", instr)
+	c.PC++ // increment program counter to point to next instruction
+	return instr
 }
