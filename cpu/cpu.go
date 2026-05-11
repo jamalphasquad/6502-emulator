@@ -50,4 +50,16 @@ func (c *CPU) Reset() {
 	//c.P |= PFLAG_DECIMAL // set decimal mode flag of P (processor status) on reset
 
 	c.A, c.X, c.Y = 0, 0, 0 // clear registers
+
+	//reset memory to 0:
+	for i := range c.Memory {
+		c.Memory[i] = 0
+	}
+
+}
+
+// TODO: stub for now
+func (c *CPU) ExectuteCode() {
+	instructions := c.Memory[c.PC] // fetch instruction at current program counter
+	_ = instructions
 }
