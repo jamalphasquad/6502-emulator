@@ -56,19 +56,24 @@ func (c *CPU) Reset() {
 		c.Memory[i] = 0
 	}
 
+	//loading program into memory at reset for testing purposes (not actually how it works in real hardware)
+	//TODO: eventually we will want to load a program from a file (like a .nes ROM) instead of hardcoding it in the code like this
+	loadSampleProgram(c)
+
+	// c.ExecuteCode(1) //run just one instruction for now
+
+}
+
+func fetchInstruction(c *CPU) Instruction {
+	opcode := c.Memory[c.PC]
+	return instructionSet[opcode]
 }
 
 // TODO: stub for now (executing n number of instructions)
-func (c *CPU) ExectuteCode(numInstructions uint32) {
+func (c *CPU) ExecuteCode(numInstructions uint32) {
 
 	for i := uint32(0); i < numInstructions; i++ {
-		instruction := c.fetchInstruction()
+		instr := fetchInstruction(c)
+		executeInstruction(c, instr)
 	}
-}
-
-func (c *CPU) fetchInstruction() uint8 {
-	instr := c.Memory[c.PC] // fetch instruction at current program counter
-	println("fetching instruction: ", instr)
-	c.PC++ // increment program counter to point to next instruction
-	return instr
 }

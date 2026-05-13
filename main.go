@@ -6,5 +6,5 @@ func main() {
 	println("...6502 CPU Emulator starting...")
 	cpu := cpu.CPU{}
 	cpu.Reset()
-	cpu.ExectuteCode(2)
+	cpu.ExecuteCode(1)
 }
